@@ -10,7 +10,7 @@ import AvatarUser from "./avatar";
 import { Link } from "react-router-dom";
 import { useToken } from "@/utils/contexts/token";
 import { useToast } from "./ui/use-toast";
-import { User2Icon, HistoryIcon, LogOutIcon } from "lucide-react";
+import { User2Icon, HistoryIcon, LogOutIcon, Table2Icon } from "lucide-react";
 
 export default function AccountMenu() {
   const { user, changeToken } = useToken();
@@ -27,7 +27,10 @@ export default function AccountMenu() {
       <DropdownMenuTrigger>
         <AvatarUser />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-44 bg-color-card text-white" align="end">
+      <DropdownMenuContent
+        className="w-44 bg-color-card text-white"
+        align="end"
+      >
         <DropdownMenuLabel className="text-center">
           Welcome {user.full_name}
         </DropdownMenuLabel>
@@ -38,11 +41,20 @@ export default function AccountMenu() {
           </DropdownMenuItem>
         </Link>
         <DropdownMenuSeparator />
-        <Link to="/books/historyBorrow">
-          <DropdownMenuItem className="flex gap-1">
-            <HistoryIcon /> History borrow
-          </DropdownMenuItem>
-        </Link>
+        {user.role === "admin" && (
+          <Link to="/dashboard/books/list">
+            <DropdownMenuItem className="flex gap-1">
+              <Table2Icon /> Dashboard
+            </DropdownMenuItem>
+          </Link>
+        )}
+        {user.role === "user" && (
+          <Link to="/books/historyBorrow">
+            <DropdownMenuItem className="flex gap-1">
+              <HistoryIcon /> History borrow
+            </DropdownMenuItem>
+          </Link>
+        )}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="flex gap-1">
           <LogOutIcon /> Logout

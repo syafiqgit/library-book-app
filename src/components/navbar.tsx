@@ -14,6 +14,11 @@ export function Navbar() {
         </Link>
         {token ? (
           <div className="flex items-center gap-4">
+            {user.role === "admin" && (
+              <Link to="/dashboard/books/list">
+                <Button>Dashboard</Button>
+              </Link>
+            )}
             {user.role === "user" && (
               <>
                 <Link to="/books/historyBorrow">
