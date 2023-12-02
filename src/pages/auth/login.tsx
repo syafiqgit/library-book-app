@@ -52,7 +52,7 @@ export default function Login() {
           <p className="text-lg text-slate-300">Login to your account here</p>
         </div>
         <Form {...form}>
-          <form action="" onSubmit={form.handleSubmit(onSubmitLogin)} className="text-white">
+          <form action="" onSubmit={form.handleSubmit(onSubmitLogin)}>
             <CustomFormfield control={form.control} name="email" label="Email">
               {(field) => (
                 <Input
@@ -61,6 +61,7 @@ export default function Login() {
                   disabled={form.formState.isSubmitting}
                   aria-disabled={form.formState.isSubmitting}
                   {...field}
+                  className="text-black"
                 />
               )}
             </CustomFormfield>

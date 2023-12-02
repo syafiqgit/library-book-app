@@ -51,7 +51,7 @@ export default function Register() {
           </p>
         </div>
         <Form {...form}>
-          <form action="" onSubmit={form.handleSubmit(onSubmitRegister)} className="text-white">
+          <form action="" onSubmit={form.handleSubmit(onSubmitRegister)}>
             <CustomFormfield control={form.control} name="email" label="Email">
               {(field) => (
                 <Input
@@ -60,6 +60,7 @@ export default function Register() {
                   disabled={form.formState.isSubmitting}
                   aria-disabled={form.formState.isSubmitting}
                   {...field}
+                  className="text-black"
                 />
               )}
             </CustomFormfield>
