@@ -2,6 +2,7 @@
 import { PayloadPagination, Response } from "@/utils/types/api";
 import { Book } from ".";
 import axiosWithConfig from "../axiosConfig";
+import { BookSchema } from "./types";
 
 export const getNewBooks = async () => {
   try {
@@ -55,5 +56,17 @@ export const getDetailBooks = async (id_book: string) => {
     return response.data as Response<Book>;
   } catch (error: any) {
     throw Error(error.reponse.data.message);
+  }
+};
+
+export const editBooks = async (body: BookSchema, id_book: number) => {
+  try {
+    const response = await axiosWithConfig.put(
+      `https://hells-kitchen.onrender.com/api/v1/books/${id_book}`,
+      body
+    );
+    return response.data as Response;
+  } catch (error: any) {
+    throw Error(error.response.data.message);
   }
 };

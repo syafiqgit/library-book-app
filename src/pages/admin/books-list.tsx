@@ -14,9 +14,10 @@ import LayoutPage from "@/layouts/layout-page";
 import { Book } from "@/utils/apis/books";
 import { getAllBooks } from "@/utils/apis/books/api";
 import { useEffect, useState } from "react";
-import { Edit2Icon, Trash2Icon } from "lucide-react";
+import { Trash2Icon } from "lucide-react";
 import { deleteBooks } from "@/utils/borrow/api";
 import Alert from "@/components/alert";
+import EditBooks from "./edit-books";
 
 export default function BooksList() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -80,7 +81,7 @@ export default function BooksList() {
               <TableCell>{book.isbn}</TableCell>
               <TableCell>{`${book.featured}`}</TableCell>
               <TableCell>
-                <Edit2Icon />
+                <EditBooks data={book}/>
               </TableCell>
               <TableCell>
                 <Alert
