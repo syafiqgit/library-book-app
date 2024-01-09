@@ -10,8 +10,10 @@ import {
   useCallback,
   useEffect,
 } from "react";
+
 import { useToast } from "@/components/ui/use-toast";
-import axiosWithConfig, { setAxiosConfig } from "@/utils/apis/axiosConfig";
+
+import axiosWithConfig, {setAxiosConfig} from "../apis/axiosConfig";
 import { Profile, getProfile } from "../apis/user";
 
 interface Context {
@@ -35,13 +37,18 @@ const TokenContext = createContext<Context>(contextValue);
 export function TokenProvider({ children }: Readonly<Props>) {
   const { toast } = useToast();
 
-  const [token, setToken] = useState(localStorage.getItem("item") ?? "");
+  const [token, setToken] = useState(localStorage.getItem("token") ?? "");
   const [user, setUser] = useState<Partial<Profile>>({});
 
+  useEffect(() => {
+    setAxiosConfig(token);
+    token !== "" && fetchProfile();
+  }, [token]);
+
   axiosWithConfig.interceptors.response.use(
-    (respone: any) => respone,
-    (error: { respone: { status: number; }; }) => {
-      if (error.respone.status === 401) {
+    (response: any) => response,
+    (error: any) => {
+      if (error.response.status === 401) {
         changeToken();
       }
 
@@ -49,19 +56,14 @@ export function TokenProvider({ children }: Readonly<Props>) {
     }
   );
 
-  useEffect(() => {
-    setAxiosConfig(token);
-    token !== "" && fetchProfile();
-  }, [token]);
-
   const fetchProfile = useCallback(async () => {
     try {
       const result = await getProfile();
       setUser(result.payload);
-    } catch (error: any) {
+    } catch (error) {
       toast({
-        title: "Opps, something went wrong",
-        description: error.message.toString(),
+        title: "Oops! Something went wrong.",
+        description: (error as Error).message,
         variant: "destructive",
       });
     }
@@ -69,10 +71,10 @@ export function TokenProvider({ children }: Readonly<Props>) {
 
   const changeToken = useCallback(
     (token?: string) => {
-      const NewToken = token ?? "";
-      setToken(NewToken);
+      const newToken = token ?? "";
+      setToken(newToken);
       if (token) {
-        localStorage.setItem("token", NewToken);
+        localStorage.setItem("token", newToken);
       } else {
         localStorage.removeItem("token");
         setUser({});
@@ -101,7 +103,7 @@ export function useToken() {
   const context = useContext(TokenContext);
 
   if (context === undefined) {
-    throw new Error("Error, useToken must be used within TokenContext");
+    throw new Error("ERROR, useToken must be used within TokenContext");
   }
 
   return context;

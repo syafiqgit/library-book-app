@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import LayoutBooks from "@/layouts/layout-books";
-import { Book, getBooks } from "@/utils/apis/books";
+import { Book} from "@/utils/apis/books";
 import { useEffect, useState } from "react";
 import CardBook from "./card-book";
 import { useToast } from "./ui/use-toast";
+import { getNewBooks } from "@/utils/apis/books/api";
 
 export default function NewBooks() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -17,7 +18,7 @@ export default function NewBooks() {
 
   const fetchData = async () => {
     try {
-      const response = await getBooks();
+      const response = await getNewBooks();
       setBooks(response.payload.datas);
     } catch (error:any) {
       toast({

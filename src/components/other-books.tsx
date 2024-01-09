@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import LayoutBooks from "@/layouts/layout-books";
 import { Book } from "@/utils/apis/books";
-import { getNewBooks } from "@/utils/apis/books/api";
+import { getBooks, getNewBooks } from "@/utils/apis/books/api";
 import { useEffect, useState } from "react";
 import CardBook from "./card-book";
 import { useToast } from "./ui/use-toast";
@@ -18,7 +18,7 @@ export default function OtherBooks() {
 
   const fetchData = async () => {
     try {
-      const response = await getNewBooks();
+      const response = await getBooks();
       setBooks(response.payload.datas);
     } catch (error:any) {
       toast({
@@ -30,7 +30,7 @@ export default function OtherBooks() {
   };
 
   return (
-    <LayoutBooks title="Other books" linkTitle="See all" linkTo="/books/others">
+    <LayoutBooks title="All books" linkTitle="See all" linkTo="/books/others">
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center">
         {books.map((book) => (
           <CardBook data={book} key={book.id} />

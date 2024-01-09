@@ -36,3 +36,14 @@ export const deleteBooks = async (id_borrow: string) => {
     throw Error(error.response.data.message);
   }
 };
+
+export const getUsersBorrow = async () => {
+  try {
+    const response = await axiosWithConfig.get(
+      `https://hells-kitchen.onrender.com/api/v1/books`
+    );
+    return response.data as Response<PayloadPagination<Borrow>>
+  } catch (error:any) {
+    throw Error(error.response.data.message);
+  }
+};

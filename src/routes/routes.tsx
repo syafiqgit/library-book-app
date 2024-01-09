@@ -10,6 +10,7 @@ import HistoryBorrow from "@/pages/books/history-borrow";
 import AllNewBooks from "@/pages/books/all-new-books";
 import AllOtherBook from "@/pages/books/all-other-books";
 import BooksList from "@/pages/admin/books-list";
+import UsersBorrow from "@/pages/admin/users-borrow";
 
 export function Routes() {
   const routes = createBrowserRouter([
@@ -26,6 +27,7 @@ export function Routes() {
         { path: "/books/new", element: <AllNewBooks /> },
         { path: "/books/others", element: <AllOtherBook /> },
         { path: "/dashboard/books/list", element: <BooksList /> },
+        { path: "/dashboard/borrow/users", element: <UsersBorrow /> },
       ],
     },
   ]);

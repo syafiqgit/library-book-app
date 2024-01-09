@@ -10,3 +10,18 @@ export type PayloadPagination<T = any> = {
   totalPages: number;
   currentPage: number;
 };
+
+export interface Request {
+  path?: string;
+  query?: string;
+  sort?: "new" | "popular";
+  filter?: string;
+  limit?: string | number;
+  page?: string | number;
+}
+
+export interface Meta {
+  currentPage: number;
+  totalItems: number;
+  totalPages: number;
+}
