@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/popover";
 
 import { cn } from "@/utils/utils";
-import { getBooks } from "@/utils/apis/books";
+import { getAllBooks } from "@/utils/apis/books/api";
 
 interface ComboboxDatas {
   id: number;
@@ -41,7 +41,7 @@ const Combobox = ({ placeholder = "Search..." }: ComboboxProps) => {
       return;
     }
 
-    const result = await getBooks({ query });
+    const result = await getAllBooks({ query });
     const newDatas =
       result.payload?.datas.map((data) => {
         return { id: data.id, title: data.title };

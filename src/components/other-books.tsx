@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import LayoutBooks from "@/layouts/layout-books";
 import { Book } from "@/utils/apis/books";
-import { getBooks, getNewBooks } from "@/utils/apis/books/api";
+import { getBooks} from "@/utils/apis/books/api";
 import { useEffect, useState } from "react";
 import CardBook from "./card-book";
 import { useToast } from "./ui/use-toast";

@@ -1,9 +1,13 @@
-import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import LayoutPage from "@/layouts/layout-page";
-import { useState } from "react";
 
 export default function UsersBorrow() {
-    const [borrows, setBorrows] = useState()
   return (
     <LayoutPage>
       <Table>
@@ -19,9 +23,7 @@ export default function UsersBorrow() {
             <TableHead className="text-white">Remove</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-
-        </TableBody>
+        <TableBody></TableBody>
       </Table>
     </LayoutPage>
   );
